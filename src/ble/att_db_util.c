@@ -69,8 +69,10 @@ static void att_db_util_set_end_tag(void){
 
 void att_db_util_init(void){
 #ifdef HAVE_MALLOC
-	att_db = (uint8_t*) malloc(128);
-	att_db_max_size = 128;
+    if (att_db == NULL){
+        att_db = (uint8_t*) malloc(128);
+        att_db_max_size = 128;
+    }
 #else
 	att_db = att_db_storage;
 	att_db_max_size = sizeof(att_db_storage);
